@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% set person = members | random %}
+    <h3 class="text-center">{{ person["name"]}} {{ person["surname"] }}</h3>
+    <img src="{{ person["photo"] }}" class="rounded mx-auto d-block" alt="{{ person["name"]}} {{ person["surname"] }} photo">
+    <h4 class="text-center">{% for i in person["professions"] %} {{ i }},{% endfor %}</h4>
+{% endblock %}
+
+
+

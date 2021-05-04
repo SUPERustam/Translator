@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Линус",
+    "surname": "Торвальдс",
+    "photo": "https://filearchive.cnews.ru/img/news/2020/07/06/linus600.jpg",
+    "professions": [
+      "main developer of Linux kernel",
+      "software engineer"
+    ]
+  },
+  {
+    "name": "Сэр Тим",
+    "surname": "Бернерс-Ли",
+    "photo": "https://www.yuga.ru/media/fc/64/sir_lee_b01__fnmfirm.jpg",
+    "professions": [
+      "main developer of HTTP",
+      "computer scientist"
+    ]
+  },
+  {
+    "name": "Джеймс",
+    "surname": "Гослинг",
+    "photo": "https://www.peoples.ru/technics/designer/james_gosling/0DjCiKcrk8lnJ.jpeg",
+    "professions": [
+      "main developer of Java",
+      "computer scientist"
+    ]
+  },
+  {
+    "name": "Андерс",
+    "surname": "Хейлсберг",
+    "photo": "https://adukar.by/images/photo/10-legendar-6.jpg",
+    "professions": [
+      "main developer of Pascal, Delphi, C#, TypeScript",
+      "software engineer"
+    ]
+  },
+  {
+    "name": "Марк",
+    "surname": "Цукерберг",
+    "photo": "https://memepedia.ru/wp-content/uploads/2018/04/zucker-00-600x340.jpg",
+    "professions": [
+      "internet entrepreneur",
+      "philanthropist"
+    ]
+  }
+]
