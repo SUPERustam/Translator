@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h4 class="text-center">По каютам!</h4>
+    {% for person in persons %}
+        {% if loop.first %}
+            <h4 class="text-center">{{ person }} - Каюта № {{ loop.index }} - капитан корабля</h4>
+        {% else %}
+            <h4 class="text-center">{{ person }} - Каюта № {{ loop.index }}</h4>
+        {% endif %}
+    {% endfor %}}
+
+{% endblock %}
