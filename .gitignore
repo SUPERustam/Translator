@@ -1,0 +1,10 @@
+venv
+.idea
+data/__pycache__/
+forms/__pycache__/
+.vscode
+__pycache__
+
+exam
+
+security.txt
