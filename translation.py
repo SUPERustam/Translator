@@ -1,19 +1,19 @@
 import pymorphy2
 
- perevod = {'а': 'Ⰰ', 'б': 'Ⰱ', 'в': 'Ⰲ', 'г': 'Ⰳ', 'д': 'Ⰴ', 'е': 'Ⰵ', 'ж': 'Ⰶ',
-            'з': 'Ⰸ', 'и': 'Ⰻ', 'і': 'Ⰹ',
-            'к': 'Ⰽ', 'л': 'Ⰾ', 'н': 'Ⱀ', 'о': 'Ⱁ', 'п': 'Ⱂ', 'р': 'Ⱃ',
-            'с': 'Ⱄ', 'т': 'Ⱅ', 'у': 'Ⱆ', 'ф': 'Ⱇ',
-            'х': 'Ⱈ', 'ч': 'Ⱍ', 'ш': 'Ⱎ', 'щ': 'Ⱋ', 'ъ': 'Ⱏ', 'ы': 'ⰟⰊ',
-            'ь': 'Ⱐ', 'ѣ': 'Ⱑ', 'э': 'Ⰵ', 'ю': 'Ⱓ',
-            'я': 'Ⱔ', 'м': 'Ⰿ', 'й': 'Ⰻ', 'ѳ': 'Ⱚ', 'ѵ': 'Ⰻ', 'ц': 'Ⱌ'}
- vowels = ['а', 'у', 'е', 'ы', 'о', 'э', 'ё', 'я', 'и', 'ю', 'й', 'ѣ']
- consonant = ['ц', 'к', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ф', 'в', 'п', 'р',
+perevod = {'а': 'Ⰰ', 'б': 'Ⰱ', 'в': 'Ⰲ', 'г': 'Ⰳ', 'д': 'Ⰴ', 'е': 'Ⰵ', 'ж': 'Ⰶ',
+           'з': 'Ⰸ', 'и': 'Ⰻ', 'і': 'Ⰹ',
+           'к': 'Ⰽ', 'л': 'Ⰾ', 'н': 'Ⱀ', 'о': 'Ⱁ', 'п': 'Ⱂ', 'р': 'Ⱃ',
+           'с': 'Ⱄ', 'т': 'Ⱅ', 'у': 'Ⱆ', 'ф': 'Ⱇ',
+           'х': 'Ⱈ', 'ч': 'Ⱍ', 'ш': 'Ⱎ', 'щ': 'Ⱋ', 'ъ': 'Ⱏ', 'ы': 'ⰟⰊ',
+           'ь': 'Ⱐ', 'ѣ': 'Ⱑ', 'э': 'Ⰵ', 'ю': 'Ⱓ',
+           'я': 'Ⱔ', 'м': 'Ⰿ', 'й': 'Ⰻ', 'ѳ': 'Ⱚ', 'ѵ': 'Ⰻ', 'ц': 'Ⱌ'}
+vowels = ['а', 'у', 'е', 'ы', 'о', 'э', 'ё', 'я', 'и', 'ю', 'й', 'ѣ']
+consonant = ['ц', 'к', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ф', 'в', 'п', 'р',
               'л', 'д', 'ж', 'ч', 'с', 'м', 'т', 'б', 'ѳ']
- Extra_shortness = ['ъ', 'ь']
- iat = "ѣ"
- i_10 = "і"
- fita_roots = {'Агаф': 'Агаѳ', 'Агафокл': 'Агаѳокл', 'Агафон': 'Агаѳон',
+Extra_shortness = ['ъ', 'ь']
+iat = "ѣ"
+i_10 = "і"
+fita_roots = {'Агаф': 'Агаѳ', 'Агафокл': 'Агаѳокл', 'Агафон': 'Агаѳон',
                'Антисфен': 'Антисѳен', 'Анфим': 'Анѳим',
                'Анфис': 'Анѳис', 'Ареф': 'Ареѳ', 'Афанас': 'Аѳанас', 'Афин': 'Аѳин',
                'Афиноген': 'Аѳиноген',
@@ -64,63 +64,64 @@ import pymorphy2
                }
 
 
- def f_iat(slovo):
-     if slovo.isalpha():
-         morph = pymorphy2.MorphAnalyzer()
-         sl1 = morph.parse(slovo)
-         sl = sl1[0]
-         if "NOUN" in sl.tag and {"NOUN", 'accs'} not in sl.tag and {"NOUN", 'nomn'} not in sl.tag:
-             if slovo[-1] == "е":
-                 slovo = slovo[:-1] + iat
-     else:
-         for i in range(len(slovo)):
-             if slovo[i * -1 - 1] in vowels or slovo[i * -1 - 1] in consonant:
-                 morph = pymorphy2.MorphAnalyzer()
-                 sl1 = morph.parse(slovo[:i * -1])
-                 sl = sl1[0]
-                 if "NOUN" in sl.tag and {"NOUN", 'accs'} not in sl.tag \
-                         and {"NOUN", 'nomn'} not in sl.tag:
-                     if slovo[i * -1 - 1] == "е":
-                         slovo = slovo[:i * -1 - 1] + iat + slovo[i * -1:]
-                 break
-     return slovo
+def f_iat(slovo):
+    if slovo.isalpha():
+        morph = pymorphy2.MorphAnalyzer()
+        sl1 = morph.parse(slovo)
+        sl = sl1[0]
+        if "NOUN" in sl.tag and {"NOUN", 'accs'} not in sl.tag and {"NOUN", 'nomn'} not in sl.tag:
+            if slovo[-1] == "е":
+                slovo = slovo[:-1] + iat
+    else:
+        for i in range(len(slovo)):
+            if slovo[i * -1 - 1] in vowels or slovo[i * -1 - 1] in consonant:
+                morph = pymorphy2.MorphAnalyzer()
+                sl1 = morph.parse(slovo[:i * -1])
+                sl = sl1[0]
+                if "NOUN" in sl.tag and {"NOUN", 'accs'} not in sl.tag \
+                        and {"NOUN", 'nomn'} not in sl.tag:
+                    if slovo[i * -1 - 1] == "е":
+                        slovo = slovo[:i * -1 - 1] + iat + slovo[i * -1:]
+                break
+    return slovo
 
 
- def ru_perevod_gl(text):
-     text = text.split()
-     text2 = ''
-     for i in text: ## перевод на дореформенную орфографию
-         slovo = i
-         slovo = f_iat(slovo) ## ѣ (ять)
-         if 'ф' in slovo: ## Ѳ (Ѳита)
-             for i in fita_roots:
-                 if i in slovo:
-                     slovo = slovo.replace(i, fita_roots[i])
-         if slovo.isalpha(): ## ъ (еръ)
-             if slovo[-1] in consonant:
-                 slovo += 'ъ'
-         else:
-             for i in range(len(slovo)):
-                 if slovo[(i + 1) * -1] in vowels:
-                     break
-                 elif slovo[(i + 1) * -1] in consonant:
-                     slovo = slovo[:(i + 1) * -1 + 1] + 'ъ' + slovo[(i + 1) * -1 + 1:]
-                     break
-         slovo = list(slovo)
-         if 'и' in slovo: ## i (и десятеричное)
-             for i in range(len(slovo) - 1):
-                 if slovo[i] == 'и' and slovo[i + 1] in vowels:
-                     slovo[i] = i_10
-         text2 += ''.join(slovo) + ' '
-     slovo = list(text2.lower())
-     slovo2 = ''
-     for i in slovo: ## перевод на глаголицу
-         if i in perevod:
-             slovo2 += perevod[i]
-         else:
-             slovo2 += i
-     return slovo2
+def ru_perevod_gl(text):
+    text = text.split()
+    text2 = ''
+    for i in text: ## перевод на дореформенную орфографию
+        slovo = i
+        #if 'е' in slovo:
+         #   slovo = f_iat(slovo) ## ѣ (ять)
+        if 'ф' in slovo: ## Ѳ (Ѳита)
+            for i in fita_roots:
+                if i in slovo:
+                    slovo = slovo.replace(i, fita_roots[i])
+        if slovo.isalpha(): ## ъ (еръ)
+            if slovo[-1] in consonant:
+                slovo += 'ъ'
+        else:
+            for i in range(len(slovo)):
+                if slovo[(i + 1) * -1] in vowels:
+                    break
+                elif slovo[(i + 1) * -1] in consonant:
+                    slovo = slovo[:(i + 1) * -1 + 1] + 'ъ' + slovo[(i + 1) * -1 + 1:]
+                    break
+        slovo = list(slovo)
+        if 'и' in slovo: ## i (и десятеричное)
+            for i in range(len(slovo) - 1):
+                if slovo[i] == 'и' and slovo[i + 1] in vowels:
+                    slovo[i] = i_10
+        text2 += ''.join(slovo) + ' '
+    slovo = list(text2.lower())
+    slovo2 = ''
+    for i in slovo: ## перевод на глаголицу
+        if i in perevod:
+            slovo2 += perevod[i]
+        else:
+            slovo2 += i
+    return slovo2
 
 
- if __name__ == "__main__":
-     print(ru_perevod_gl(input()))
+if __name__ == "__main__":
+    print(ru_perevod_gl(input()))
