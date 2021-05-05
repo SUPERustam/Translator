@@ -16,8 +16,9 @@
         </div>
         <div class="col-md">
             <div class="form-floating">
-                  <label for="floatingTextarea">ⰃⰎⰀⰃⰑⰎⰋⰜⰀ</label><br>
-                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea">{{result}}</textarea>
+                <label for="floatingTextarea">ⰃⰎⰀⰃⰑⰎⰋⰜⰀ</label><br>
+                <textarea class="form-control" placeholder="Leave a comment here"
+                          id="floatingTextarea">{{result}}</textarea>
             </div>
         </div>
     </div>
@@ -27,7 +28,9 @@
 
 <ul class="list-group list-group-horizontal-xxl">
     {% for item in history %}
-    <li class="list-group-item">{{item}}</li>
+    <li class="list-group-item">{{item.content}} - {{item.result}} <a href="/old_trans_delete/{{ item.id }}" class="btn btn-danger">
+        Удалить
+    </a></li>
     {% endfor %}
 </ul>
 

@@ -1,6 +1,6 @@
 import datetime
 from flask import Flask, url_for, render_template, redirect, request, \
-    make_response, session, abort, jsonify
+    make_response, session, abort, jsonify, g
 from flask_login import LoginManager, current_user, login_user, login_manager, login_required
 
 from forms.login import LoginForm
@@ -10,7 +10,7 @@ from data import db_session, translate_api
 from data.users import User
 from data.history import History
 from config import SECRET_KEY
-from translation import ru_perevod_gl
+from translation_core import ru_perevod_gl
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = SECRET_KEY
@@ -97,11 +97,21 @@ def login():
     return render_template('login.html', title='Авторизация', form=form)
 
 
-@app.route('/', methods=['GET', 'POST'])  # todo: add history
-@login_required
-def translate():
+@app.route('/', methods=['GET', 'POST'])
+def main_translate():
     form = TranslateForm()
+    history_list = []
+
+    if current_user.is_authenticated:
+        db_sess = db_session.create_session()
+        history_list = db_sess.query(History).filter(History.user_id ==
+                                                     str(current_user.id)).all()[::-1]
+        db_sess.close()
+
     if form.validate_on_submit():
+        if not current_user.is_authenticated:
+            return render_template('index.html', title="ⰒⰅⰓⰅⰂⰑⰄⰝⰋⰍⰠ ⰓⰀ ⰃⰎⰀⰃⰑⰎⰋⰜⰖ", form=form,
+                                   result=ru_perevod_gl(form.content.data), history=[])
         db_sess = db_session.create_session()
         history = History()
         history.content = form.content.data
@@ -109,59 +119,28 @@ def translate():
         current_user.history.append(history)
         db_sess.merge(current_user)
         db_sess.commit()
+        history_list = db_sess.query(History).filter(History.user_id ==
+                                                     str(current_user.id)).all()[::-1]
         db_sess.close()
         return render_template('index.html', title="ⰒⰅⰓⰅⰂⰑⰄⰝⰋⰍⰠ ⰓⰀ ⰃⰎⰀⰃⰑⰎⰋⰜⰖ", form=form,
-                               result=ru_perevod_gl(form.content.data), history=[])
-    return render_template('index.html', title='ⰒⰅⰓⰅⰂⰑⰄⰝⰋⰍⰠ ⰓⰀ ⰃⰎⰀⰃⰑⰎⰋⰜⰖ', form=form, history=[])
+                               result=ru_perevod_gl(form.content.data), history=history_list)
+    return render_template('index.html', title='ⰒⰅⰓⰅⰂⰑⰄⰝⰋⰍⰠ ⰓⰀ ⰃⰎⰀⰃⰑⰎⰋⰜⰖ',
+                           form=form, history=history_list)
 
 
-# @app.route('/news/<int:id>', methods=['GET', 'POST'])
-# @login_required
-# def edit_news(id):
-#     form = NewsForm()
-#     if request.method == "GET":
-#         db_sess = db_session.create_session()
-#         news = db_sess.query(News).filter(News.id == id,
-#                                           News.user == current_user
-#                                           ).first()
-#         if news:
-#             form.title.data = news.title
-#             form.content.data = news.content
-#             form.is_private.data = news.is_private
-#         else:
-#             abort(404)
-#     if form.validate_on_submit():
-#         db_sess = db_session.create_session()
-#         news = db_sess.query(News).filter(News.id == id,
-#                                           News.user == current_user
-#                                           ).first()
-#         if news:
-#             news.title = form.title.data
-#             news.content = form.content.data
-#             news.is_private = form.is_private.data
-#             db_sess.commit()
-#             return redirect('/')
-#         else:
-#             abort(404)
-#     return render_template('news.html',
-#                            title='Редактирование новости',
-#                            form=form
-#                            )
-#
-#
-# @app.route('/news_delete/<int:id>', methods=['GET', 'POST'])
-# @login_required
-# def news_delete(id):
-#     db_sess = db_session.create_session()
-#     news = db_sess.query(News).filter(News.id == id,
-#                                       News.user == current_user
-#                                       ).first()
-#     if news:
-#         db_sess.delete(news)
-#         db_sess.commit()
-#     else:
-#         abort(404)
-#     return redirect('/')
+@app.route('/old_trans_delete/<int:id>', methods=['GET', 'POST'])
+@login_required
+def news_delete(id):
+    db_sess = db_session.create_session()
+    history_item = db_sess.query(History).filter(History.id == id,
+                                                 History.user_id == str(current_user.id)
+                                                 ).first()
+    if history_item:
+        db_sess.delete(history_item)
+        db_sess.commit()
+    else:
+        abort(404)
+    return redirect('/')
 
 
 def main():
