@@ -1,7 +1,8 @@
 import datetime
 from flask import Flask, url_for, render_template, redirect, request, \
     make_response, session, abort, jsonify, g
-from flask_login import LoginManager, current_user, login_user, login_manager, login_required
+from flask_login import LoginManager, current_user, login_user, login_manager, \
+    login_required, logout_user
 
 from forms.login import LoginForm
 from forms.translate_form import TranslateForm
@@ -140,6 +141,13 @@ def news_delete(id):
         db_sess.commit()
     else:
         abort(404)
+    return redirect('/')
+
+
+@app.route('/logout', methods=['GET', 'POST'])
+@login_required
+def logout():
+    logout_user()
     return redirect('/')
 
 
