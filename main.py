@@ -165,7 +165,7 @@ def translate():
 
 
 def main():
-    db_session.global_init("db/trans.sqlite3")
+    db_session.global_init("db/trans.sql")
     # app.register_blueprint(translate_api.blueprint)
     app.run()
 
