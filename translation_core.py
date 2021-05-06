@@ -120,7 +120,7 @@ def ru_perevod_gl(text):
             slovo2 += perevod[i]
         else:
             slovo2 += i
-    return slovo2
+    return slovo2.strip()
 
 
 if __name__ == "__main__":
