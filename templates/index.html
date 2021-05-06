@@ -30,7 +30,7 @@
     {% for item in history %}
     <li class="list-group-item">{{item.content}} - {{item.result}} <a href="/old_trans_delete/{{ item.id }}" class="btn btn-danger">
         Удалить
-    </a></li>
+    </a> {{item.created_date}}</li>
     {% endfor %}
 </ul>
 
