@@ -74,11 +74,11 @@ def api_show_history(client):
 def api_about():
     return jsonify({
         'name': 'ⰒⰅⰓⰅⰂⰑⰄⰝⰋⰍⰠ ⰓⰀ ⰃⰎⰀⰃⰑⰎⰋⰜⰖ - Переводчик с русского языка на глаголицу',
-        'official site': 'https://github.com/SUPERustam/Translater',
-        'source code': 'https://github.com/SUPERustam/Translater',
+        'official site': 'translator-glagolitsa.herokuapp.com/',
+        'source code': 'https://github.com/SUPERustam/Translator',
         'api requests and examples':
             [{'get translation': '/api/translate/words&optional_example@mail.com',
               'show history': 'api/show_history/example@mail.com&password'}],
-        'message': 'Please, star our project: https://github.com/SUPERustam/Translater'
+        'message': 'Please, star our project: https://github.com/SUPERustam/Translator'
                    ' and share this site with others :heart:'
     })
