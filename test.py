@@ -1,23 +1,26 @@
 from requests import get, post, delete
 
-print(get('http://localhost:5000/api/news').json())
+# first pack of tests
+print(get('http://localhost:5000/api/translate/Семья').json())
+print(get('http://localhost:5000/api/translate/Семья&rrr@222.ru').json())
+print(get('http://localhost:5000/api/translate/Семья&zero').json())
+print(get('http://localhost:5000/api/translate/Семья&').json())
+print(get('http://localhost:5000/api/translate/&rrr@222.ru').json())
+print(get('http://localhost:5000/api/translate/&').json())
+print(get('http://localhost:5000/api/translate/').json())
+print('\n')
 
-print(get('http://localhost:5000/api/news/1').json())
 
-print(get('http://localhost:5000/api/news/999').json())
+# second pack of tests
+print(get('http://localhost:5000/api/show_history/rrr@222.ru').json())
+print(get('http://localhost:5000/api/show_history/rrr@222.ru&').json())
+print(get('http://localhost:5000/api/show_history/rrr@222.ru&hello').json())
+print(get('http://localhost:5000/api/show_history/rrr@222.ru&rrr').json())
+print(get('http://localhost:5000/api/show_history/rr22.ru&rrr').json())
+print(get('http://localhost:5000/api/show_history/&rrr').json())
+print(get('http://localhost:5000/api/show_history/&').json())
+print(get('http://localhost:5000/api/show_history/').json())
+print('\n')
 
-print(get('http://localhost:5000/api/news/q').json())
-
-print(post('http://localhost:5000/api/news',
-           json={'title': 'Заголовок'}).json())
-
-print(post('http://localhost:5000/api/news',
-           json={'title': 'Заголовок',
-                 'content': 'Текст новости',
-                 'user_id': 1,
-                 'is_private': False}).json())
-
-print(delete('http://localhost:5000/api/news/999').json())
-# новости с id = 999 нет в базе
-#
-print(delete('http://localhost:5000/api/news/1').json())
+# third pack of tests
+print(get('http://localhost:5000/api/about/').json())
