@@ -1,5 +1,5 @@
 # ⰒⰅⰓⰅⰂⰑⰄⰝⰋⰍⰠ ⰓⰀ ⰃⰎⰀⰃⰑⰎⰋⰜⰖ - Переводчик с русского языка на глаголицу
-WARNING: This is not production repository
+**WARNING**: This is not production repository.
 
 ### How to run app?
 
