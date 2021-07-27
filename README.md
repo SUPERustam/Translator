@@ -1,4 +1,4 @@
-# ⰒⰅⰓⰅⰂⰑⰄⰝⰋⰍⰠ ⰓⰀ ⰃⰎⰀⰃⰑⰎⰋⰜⰖ - Переводчик с русского языка на глаголицу
+# ⰒⰅⰓⰅⰂⰑⰄⰝⰋⰍⰠ ⰓⰀ ⰃⰎⰀⰃⰑⰎⰋⰜⰖ - Переводчик с русского языка на глаголицу - Translator from Russian to Glagolitsa 
 **WARNING**: This is not production repository.
 
 ### How to run app?
@@ -8,10 +8,10 @@
 3. Go to [localhost:5000](http://localhost:5000) in your favorite browser :heart:
 
 ### About
-This's Flask web app with SQLAlchemy and Bootstrap
+This's Flask web app with SQLAlchemy and Bootstrap 4.6
 
 - Static info `static/img` and `static/css`
-- **frond-end** info in `templates` directory (html, css, js etc.)
+- **frond-end** info in `templates` directory (HTML, CSS, Bootstrap 4.6 etc.)
 - `db` for database
 - `data` for classes of the necessary work with database
 - `forms` for forms backend
