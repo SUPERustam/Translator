@@ -2,7 +2,6 @@ flask
 flask-wtf
 flask-login
 sqlalchemy
-flask-login
 SQLAlchemy-serializer
 requests
 pymorphy2
